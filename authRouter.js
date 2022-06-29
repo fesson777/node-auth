@@ -18,5 +18,6 @@ router.post(
 )
 router.post('/login', controller.login)
 router.get('/users', roleMiddleware(['USER', 'ADMIN']), controller.getUsers)
+router.delete('/users', roleMiddleware(['ADMIN']), controller.deleteUser)
 
 module.exports = router

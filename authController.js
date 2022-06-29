@@ -71,6 +71,22 @@ class authController {
       console.log(e)
     }
   }
+  async deleteUser(req, res) {
+    try {
+      const { name } = req.body
+      const user = await User.findOne({ username: name })
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `Пользователь для удаления не найден!` })
+      }
+      await User.deleteOne({ _id: user._id })
+
+      res.json(user)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 }
 
 module.exports = new authController()
